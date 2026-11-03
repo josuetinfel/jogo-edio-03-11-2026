@@ -32,6 +32,9 @@ botoesLetras.forEach(function (botao) {
 botao.disabled = false;
 });
 }
+
+botaoReiniciar.addEventListener('click', iniciarJogo);
+
 iniciarJogo();
 
 botoesLetras.forEach(function (botao) {
@@ -78,4 +81,8 @@ botoesLetras.forEach(function (botao) {
 botao.disabled = true;
 });
 }
+
+botaoReiniciar.addEventListener('click', iniciarJogo);
+iniciarJogo();
+
 
