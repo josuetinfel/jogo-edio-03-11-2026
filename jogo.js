@@ -9,5 +9,13 @@
 // Pergunta para a turma: o que aconteceria se o <script> estivesse no <head> ? (Os
 // elementos ainda não existiriam e o getElementById do passo 3 devolveria null .)
 
-console.log('O jogo carregou!');
+// console.log('O jogo carregou!');
 
+//Objetivo: guardar tudo que o jogo precisa lembrar durante a partida.
+let palavraSecreta = 'JAVASCRIPT';
+let letrasChutadas = [];
+let tracos = [];
+let erros = 0;
+let maxErros = 6;
+
+console.log(palavraSecreta);
