@@ -18,4 +18,15 @@ let tracos = [];
 let erros = 0;
 let maxErros = 6;
 
-console.log(palavraSecreta);
+//console.log(palavraSecreta);
+
+let imagem = document.getElementById('imagem');
+let textoPalavra = document.getElementById('palavra');
+let textoMensagem = document.getElementById('mensagem');
+let textoErros = document.getElementById('erros');
+let botaoReiniciar = document.getElementById('reiniciar');
+let botoesLetras = document.querySelectorAll('.letra');
+
+//console.log(botoesLetras.length);
+//console.log(textoPalavra);
+
