@@ -1,17 +1,3 @@
-// Objetivo: confirmar que o navegador está lendo o jogo.js .
-// No index.html , a linha abaixo fica logo antes de </body> . Ela vem no final para que todo
-// o HTML já exista quando o script rodar.
-// <script src="jogo.js"></script>
-// Crie o arquivo jogo.js na mesma pasta e escreva:
-// console.log('O jogo carregou!');
-// Teste: abra o index.html , aperte F12 e veja a mensagem na aba Console. Depois apague
-// essa linha.
-// Pergunta para a turma: o que aconteceria se o <script> estivesse no <head> ? (Os
-// elementos ainda não existiriam e o getElementById do passo 3 devolveria null .)
-
-// console.log('O jogo carregou!');
-
-//Objetivo: guardar tudo que o jogo precisa lembrar durante a partida.
 let palavraSecreta = 'JAVASCRIPT';
 let letrasChutadas = [];
 let tracos = [];
@@ -29,4 +15,67 @@ let botoesLetras = document.querySelectorAll('.letra');
 
 //console.log(botoesLetras.length);
 //console.log(textoPalavra);
+
+function iniciarJogo() {
+letrasChutadas = [];
+erros = 0;
+tracos = [];
+for (let i = 0; i < palavraSecreta.length; i++) {
+tracos.push('_');
+}
+textoPalavra.textContent = tracos.join(' ');
+textoMensagem.textContent = '';
+textoMensagem.className = '';
+textoErros.textContent = 'Erros: 0 de ' + maxErros;
+imagem.src = 'img/1.png';
+botoesLetras.forEach(function (botao) {
+botao.disabled = false;
+});
+}
+iniciarJogo();
+
+botoesLetras.forEach(function (botao) {
+botao.addEventListener('click', function () {
+botao.disabled = true;
+verificarLetra(botao.textContent);
+});
+});
+
+function verificarLetra(letra) {
+letrasChutadas.push(letra);
+if (palavraSecreta.includes(letra)) {
+for (let i = 0; i < palavraSecreta.length; i++) {
+if (palavraSecreta[i] === letra) {
+tracos[i] = letra;
+}
+}
+textoPalavra.textContent = tracos.join(' ');
+} else {
+erros++;
+imagem.src = 'img/' + (erros + 1) + '.png';
+textoErros.textContent = 'Erros: ' + erros + ' de ' + maxErros;
+}
+verificarFimDeJogo();
+}
+
+function verificarFimDeJogo() {
+if (!tracos.includes('_')) {
+textoMensagem.textContent = 'Parabéns, você venceu!';
+textoMensagem.className = 'vitoria';
+desativarTeclado();
+}
+if (erros === maxErros) {
+textoMensagem.textContent = 'Fim de Jogo! A palavra era: ' +
+palavraSecreta;
+textoMensagem.className = 'derrota';
+textoPalavra.textContent = palavraSecreta.split('').join(' ');
+imagem.src = 'img/7.png';
+desativarTeclado();
+}
+}
+function desativarTeclado() {
+botoesLetras.forEach(function (botao) {
+botao.disabled = true;
+});
+}
 
